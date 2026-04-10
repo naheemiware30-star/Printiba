@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Printiba® — Print Production & Web Design Studio</title>
+<meta name="description" content="Nigeria's premier print production calculator and web design studio. Instant quotes for bags, books, boxes, banners and more. Lagos-based.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --or:#F07B11;--or-d:#d96e0f;--or-l:#FFF3E5;
+  --ink:#0F0F0D;--ink2:#1a1a18;--ink3:#2a2a27;
+  --wh:#FFFFFF;--bg:#F7F3EE;--bg2:#EDE8E1;--bd:#E0D9D0;
+  --mu:#7A746C;--mf:#B5AFA8;
+  --gr:#1A9E5A;--grl:#E6F7EE;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--wh);color:var(--ink);overflow-x:hidden;}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(2deg)}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(-2deg)}}
+@keyframes borderPulse{0%,100%{border-color:rgba(240,123,17,.3)}50%{border-color:rgba(240,123,17,.8)}}
+.fade-up{animation:fadeUp .7s ease forwards;opacity:0;}
+.fade-in{animation:fadeIn .8s ease forwards;opacity:0;}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.36s}.d4{animation-delay:.5s}.d5{animation-delay:.65s}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(15,15,13,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);transition:.3s;}
+.navbar.scrolled{background:rgba(15,15,13,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.12);}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:3px;color:var(--or);}
+.nav-logo sup{font-size:.5em;vertical-align:super;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nl{background:none;border:none;color:rgba(255,255,255,.65);font-size:13px;font-weight:500;cursor:pointer;padding:7px 14px;border-radius:8px;transition:.15s;font-family:'Outfit',sans-serif;text-decoration:none;display:inline-block;}
+.nl:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-login{background:none;border:1.5px solid rgba(255,255,255,.2);color:#fff;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.nav-login:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);}
+.nav-cta{background:var(--or);color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;border:none;display:inline-flex;align-items:center;gap:6px;}
+.nav-cta:hover{background:var(--or-d);transform:translateY(-1px);}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:4px;}
+.menu-toggle span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;transition:.3s;border-radius:2px;}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--ink);z-index:890;padding:80px 2rem 2rem;flex-direction:column;gap:8px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a,.mobile-menu button{color:#fff;font-size:1.1rem;font-family:'Outfit',sans-serif;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;text-decoration:none;text-align:left;font-weight:500;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 2rem 60px;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,123,17,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(240,123,17,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-glow{position:absolute;width:600px;height:600px;background:radial-gradient(ellipse,rgba(240,123,17,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;}
+.hero-content{position:relative;text-align:center;max-width:800px;z-index:2;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(240,123,17,.12);border:1px solid rgba(240,123,17,.25);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.75rem;}
+.hero-eyebrow span{width:6px;height:6px;background:var(--or);border-radius:50%;animation:pulse 2s infinite;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;color:#fff;margin-bottom:1.5rem;letter-spacing:-1px;}
+.hero h1 .accent{color:var(--or);}
+.hero h1 .outline{-webkit-text-stroke:2px rgba(255,255,255,.3);color:transparent;}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:rgba(255,255,255,.55);line-height:1.8;max-width:580px;margin:0 auto 2.5rem;}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;}
+.btn-hero-or{background:var(--or);color:#fff;padding:14px 32px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;border:none;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-hero-or:hover{background:var(--or-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,123,17,.35);}
+.btn-hero-ghost{background:none;border:1.5px solid rgba(255,255,255,.2);color:#fff;padding:14px 32px;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-hero-ghost:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05);}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);}
+.hero-stat{text-align:center;}
+.hero-stat strong{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;}
+.hero-stat span{font-size:12px;color:rgba(255,255,255,.4);letter-spacing:.04em;}
+
+/* ── TICKER ── */
+.ticker{background:var(--or);padding:10px 0;overflow:hidden;}
+.ticker-inner{display:flex;width:max-content;animation:marquee 20s linear infinite;}
+.ticker-item{white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;padding:0 40px;}
+.ticker-dot{color:rgba(255,255,255,.5);margin-right:40px;}
+
+/* ── SECTION BASICS ── */
+section{padding:100px 2rem;}
+.section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--or);background:var(--or-l);padding:5px 14px;border-radius:20px;margin-bottom:1.25rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:1rem;}
+.section-sub{font-size:15px;color:var(--mu);line-height:1.8;max-width:560px;}
+.container{max-width:1180px;margin:0 auto;}
+
+/* ── SERVICES ── */
+.services-bg{background:var(--bg);}
+.services-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:3rem;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.service-card{background:var(--wh);border-radius:16px;border:1.5px solid var(--bd);padding:2rem;transition:.2s;position:relative;overflow:hidden;}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(240,123,17,.04),transparent);opacity:0;transition:.3s;}
+.service-card:hover{border-color:var(--or);transform:translateY(-4px);box-shadow:0 12px 32px rgba(240,123,17,.1);}
+.service-card:hover::before{opacity:1;}
+.service-icon{width:52px;height:52px;background:var(--or-l);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;}
+.service-card h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.6rem;}
+.service-card p{font-size:13px;color:var(--mu);line-height:1.8;}
+.service-link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:var(--or);margin-top:1rem;text-decoration:none;transition:.15s;}
+.service-link:hover{gap:8px;}
+
+/* ── CALCULATOR CTA ── */
+.calc-cta-section{background:var(--ink);position:relative;overflow:hidden;}
+.calc-cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(240,123,17,.12) 0%,transparent 65%),radial-gradient(ellipse at 80% 20%,rgba(26,158,90,.08) 0%,transparent 50%);}
+.calc-cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1180px;margin:0 auto;}
+.calc-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1rem;}
+.calc-cta-text p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:2rem;}
+.calc-tools{display:flex;flex-direction:column;gap:12px;}
+.calc-tool{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:.2s;cursor:pointer;text-decoration:none;}
+.calc-tool:hover{background:rgba(240,123,17,.08);border-color:rgba(240,123,17,.3);}
+.calc-tool-icon{font-size:1.4rem;flex-shrink:0;}
+.calc-tool-text strong{display:block;font-size:14px;font-weight:600;color:#fff;margin-bottom:2px;}
+.calc-tool-text span{font-size:12px;color:rgba(255,255,255,.4);}
+.calc-tool-badge{margin-left:auto;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.06em;text-transform:uppercase;}
+.badge-free{background:var(--grl);color:var(--gr);}
+.badge-prem{background:rgba(108,63,181,.2);color:#a78bfa;}
+.calc-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;animation:borderPulse 3s infinite;}
+.calc-card-top{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.calc-card-top .dot{width:10px;height:10px;border-radius:50%;background:var(--or);}
+.calc-card-top h3{font-family:'Syne',sans-serif;font-size:1rem;color:#fff;font-weight:700;}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;}
+.calc-row span:first-child{color:rgba(255,255,255,.5);}
+.calc-row span:last-child{color:#fff;font-weight:600;}
+.calc-total{display:flex;justify-content:space-between;align-items:center;padding:14px 0 0;font-size:15px;}
+.calc-total span:first-child{color:rgba(255,255,255,.7);font-weight:600;}
+.calc-total span:last-child{color:var(--or);font-weight:800;font-family:'Syne',sans-serif;font-size:1.4rem;}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1180px;margin:0 auto;}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:2rem;}
+.about-card{background:var(--bg);border-radius:14px;padding:1.25rem;border:1px solid var(--bd);}
+.about-card .ac-icon{font-size:1.5rem;margin-bottom:.6rem;}
+.about-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.4rem;}
+.about-card p{font-size:12px;color:var(--mu);line-height:1.7;}
+.about-visual{position:relative;}
+.about-badge{position:absolute;background:var(--or);color:#fff;border-radius:12px;padding:10px 16px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;}
+.about-box{background:var(--ink);border-radius:20px;padding:2.5rem;color:#fff;position:relative;overflow:hidden;}
+.about-box::after{content:'';position:absolute;bottom:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(240,123,17,.2),transparent);border-radius:50%;}
+.about-num{font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:var(--or);line-height:1;}
+.about-num-lbl{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px;}
+.about-nums{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:2rem;}
+
+/* ── PORTFOLIO ── */
+.portfolio-bg{background:var(--ink);}
+.portfolio-head{text-align:center;margin-bottom:3rem;}
+.portfolio-head .section-title{color:#fff;}
+.portfolio-head .section-sub{color:rgba(255,255,255,.45);margin:0 auto;}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1180px;margin:0 auto;}
+.pcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;transition:.2s;}
+.pcard:hover{border-color:rgba(240,123,17,.35);transform:translateY(-4px);}
+.pcard-img{height:200px;background:var(--ink3);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;}
+.pcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(15,15,13,.8));}
+.pcard-img .pcard-type{position:absolute;bottom:12px;left:14px;z-index:2;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--or);color:#fff;padding:3px 10px;border-radius:10px;}
+.pcard-body{padding:1.25rem;}
+.pcard-body h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:.4rem;}
+.pcard-body p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;}
+.pcard-meta{display:flex;gap:8px;margin-top:.75rem;flex-wrap:wrap;}
+.ptag{font-size:10px;padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);font-weight:500;}
+
+/* ── PRINT CATEGORIES ── */
+.categories-section{background:var(--bg);}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1180px;margin:0 auto;}
+.cat-card{background:var(--wh);border-radius:14px;border:1.5px solid var(--bd);padding:1.5rem;text-align:center;transition:.2s;cursor:default;}
+.cat-card:hover{border-color:var(--or);background:var(--or-l);}
+.cat-icon{font-size:2.5rem;margin-bottom:.75rem;}
+.cat-card h4{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+.cat-card p{font-size:12px;color:var(--mu);}
+
+/* ── TESTIMONIALS ── */
+.testi-section{background:var(--wh);}
+.testi-head{text-align:center;margin-bottom:3rem;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1180px;margin:0 auto;}
+.tcard{background:var(--bg);border-radius:16px;padding:1.75rem;border:1px solid var(--bd);position:relative;}
+.tcard-quote{font-size:2.5rem;color:var(--or);font-family:'Syne',sans-serif;line-height:.8;margin-bottom:.75rem;}
+.tcard p{font-size:14px;color:var(--ink);line-height:1.8;margin-bottom:1.25rem;}
+.tcard-author{display:flex;align-items:center;gap:12px;}
+.tcard-avatar{width:40px;height:40px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.tcard-author strong{display:block;font-size:13px;font-weight:600;}
+.tcard-author span{font-size:11px;color:var(--mu);}
+.stars{display:flex;gap:2px;margin-bottom:.5rem;}
+.star{color:var(--or);font-size:13px;}
+
+/* ── CONTACT ── */
+.contact-section{background:var(--ink);position:relative;overflow:hidden;}
+.contact-bg-glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(240,123,17,.1),transparent);top:50%;right:-100px;transform:translateY(-50%);pointer-events:none;}
+.contact-inner{max-width:1180px;margin:0 auto;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.contact-text h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:800;line-height:1.1;margin-bottom:1rem;}
+.contact-text p{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;}
+.contact-items{margin-top:2rem;display:flex;flex-direction:column;gap:16px;}
+.citem{display:flex;align-items:center;gap:14px;}
+.citem-icon{width:44px;height:44px;background:rgba(240,123,17,.1);border:1px solid rgba(240,123,17,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.citem strong{display:block;font-size:13px;color:#fff;font-weight:600;margin-bottom:2px;}
+.citem span{font-size:12px;color:rgba(255,255,255,.4);}
+.contact-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:5px;letter-spacing:.04em;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Outfit',sans-serif;color:#fff;outline:none;transition:.2s;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.25);}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--or);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.btn-submit{background:var(--or);color:#fff;border:none;border-radius:10px;padding:13px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;width:100%;transition:.2s;}
+.btn-submit:hover{background:var(--or-d);}
+#form-msg{font-size:13px;margin-top:8px;min-height:16px;color:var(--gr);}
+
+/* ── FOOTER ── */
+.footer{background:#0a0a09;border-top:1px solid rgba(255,255,255,.05);padding:60px 2rem 24px;}
+.footer-inner{max-width:1180px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:3rem;}
+.footer-brand{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:3px;color:var(--or);display:block;margin-bottom:.75rem;}
+.footer-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.8;max-width:260px;}
+.footer-col h4{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;margin-bottom:.6rem;transition:.15s;}
+.footer-col a:hover{color:var(--or);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.25);}
+.footer-socials{display:flex;gap:10px;}
+.social-btn{width:36px;height:36px;background:rgba(255,255,255,.05);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;transition:.2s;border:1px solid rgba(255,255,255,.06);}
+.social-btn:hover{background:var(--or);border-color:var(--or);}
+
+/* ── ONBOARDING MODAL ── */
+.ob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.ob-box{background:var(--wh);border-radius:24px;max-width:560px;width:100%;padding:2.5rem;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.3);}
+.ob-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--mf);line-height:1;}
+.ob-logo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:3px;color:var(--or);margin-bottom:.25rem;}
+.ob-box h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.5rem;}
+.ob-box .ob-sub{font-size:14px;color:var(--mu);line-height:1.7;margin-bottom:1.75rem;}
+.ob-choices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem;}
+.ob-choice{background:var(--bg);border:2px solid var(--bd);border-radius:16px;padding:1.5rem 1.25rem;cursor:pointer;text-align:center;transition:.2s;font-family:inherit;}
+.ob-choice:hover{border-color:var(--or);background:var(--or-l);}
+.ob-choice .oc-icon{font-size:2.5rem;display:block;margin-bottom:.75rem;}
+.ob-choice strong{font-family:'Syne',sans-serif;font-size:14px;display:block;margin-bottom:.4rem;}
+.ob-choice p{font-size:12px;color:var(--mu);line-height:1.5;}
+.ob-skip{text-align:center;font-size:12px;color:var(--mf);}
+.ob-skip button{background:none;border:none;color:var(--or);cursor:pointer;font-size:12px;font-family:inherit;text-decoration:underline;}
+/* Step 2 detail panels */
+.ob-detail{display:none;}
+.ob-detail.active{display:block;}
+.ob-steps{display:flex;flex-direction:column;gap:12px;margin-bottom:1.5rem;}
+.ob-step{display:flex;gap:14px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:12px 14px;}
+.ob-step .st-num{width:28px;height:28px;border-radius:50%;background:var(--or);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ob-step strong{font-size:13px;display:block;margin-bottom:2px;}
+.ob-step p{font-size:12px;color:var(--mu);line-height:1.5;}
+.btn-ob-or{background:var(--or);color:#fff;border:none;border-radius:12px;padding:13px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;width:100%;transition:.2s;}
+.btn-ob-or:hover{background:var(--or-d);}
+.btn-ob-outline{background:none;color:var(--ink);border:1.5px solid var(--bd);border-radius:12px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;width:100%;margin-bottom:10px;transition:.2s;}
+.btn-ob-outline:hover{border-color:var(--or);color:var(--or);}
+.ob-back{background:none;border:none;color:var(--mu);font-size:13px;cursor:pointer;font-family:inherit;margin-top:8px;display:block;width:100%;text-align:center;}
+
+/* ── WAB FLOAT ── */
+.wa-float{position:fixed;bottom:24px;right:24px;width:54px;height:54px;background:var(--gr);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 6px 20px rgba(26,158,90,.4);z-index:500;transition:.2s;animation:floatA 4s ease-in-out infinite;}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(26,158,90,.5);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .services-head{grid-template-columns:1fr;}
+  .services-grid{grid-template-columns:1fr 1fr;}
+  .calc-cta-inner{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr 1fr;}
+  .testi-grid{grid-template-columns:1fr 1fr;}
+  .contact-inner{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .menu-toggle{display:block;}
+  .hero h1{font-size:2.2rem;}
+  .services-grid{grid-template-columns:1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .about-cards{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .ob-choices{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;}
+  section{padding:70px 1.25rem;}
+  .footer{padding:40px 1.25rem 20px;}
+  .navbar{padding:0 1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <a class="nav-brand" href="#">
+    <span class="nav-logo">Printiba<sup>®</sup></span>
+  </a>
+  <div class="nav-links">
+    <a class="nl" href="#about">About</a>
+    <a class="nl" href="#services">Services</a>
+    <a class="nl" href="#portfolio">Portfolio</a>
+    <a class="nl" href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-login" href="Printiba_April.html" target="_blank">Login</a>
+    <a class="nav-cta" href="Printiba_April.html" target="_blank">🖨 Print Calculator</a>
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()" id="menu-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="Printiba_April.html" target="_blank" onclick="closeMenu()" style="color:var(--or)!important;font-weight:700;border:none;margin-top:12px;">🖨 Open Print Calculator</a>
+  <a href="Printiba_April.html" target="_blank" onclick="closeMenu()" style="opacity:.6;">Login / Register</a>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-up d1"><span></span>Lagos Print Production Studio</div>
+    <h1 class="fade-up d2">Nigeria's Smartest<br><span class="accent">Print Calculator</span><br>& <span class="outline">Studio</span></h1>
+    <p class="hero-sub fade-up d3">Instant quotes for bags, books, boxes, banners and more. Powered by real market rates. Built for Nigerian printers & designers.</p>
+    <div class="hero-actions fade-up d4">
+      <a class="btn-hero-or" href="Printiba_April.html" target="_blank">🖨 Get a Free Quote</a>
+      <a class="btn-hero-ghost" href="#services">Explore services →</a>
+    </div>
+    <div class="hero-stats fade-in d5">
+      <div class="hero-stat"><strong>6+</strong><span>Calculators</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>Nigeria rates</span></div>
+      <div class="hero-stat"><strong>Free</strong><span>To get started</span></div>
+      <div class="hero-stat"><strong>⭐</strong><span>Premium tools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Paper Bags</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Magazine & Book Printing</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Product Boxes</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Jotters & Notepads</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Large Format Banners</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Flyers & Brochures</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Web Design</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Print-on-Demand</span><span class="ticker-dot">·</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item">Paper Bags</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Magazine & Book Printing</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Product Boxes</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Jotters & Notepads</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Large Format Banners</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Flyers & Brochures</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Web Design</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Print-on-Demand</span><span class="ticker-dot">·</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════ -->
+<section class="services-bg" id="services" style="padding:100px 2rem;">
+  <div class="container">
+    <div class="services-head">
+      <div>
+        <span class="section-tag">What we do</span>
+        <h2 class="section-title">Explore Printiba<br>services</h2>
+      </div>
+      <p class="section-sub">From print production calculators to custom web design — we build tools and solutions for Nigerian businesses.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🖨️</div>
+        <h3>Print Production Calculator</h3>
+        <p>Instant quotes for magazines, paper bags, product boxes, jotters, large format and flyers — powered by real Lagos market rates. Free to start.</p>
+        <a class="service-link" href="Printiba_April.html" target="_blank">Open calculator →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛒</div>
+        <h3>Print E-commerce Solution</h3>
+        <p>Full online print stores with Paystack integration, product configurators, quote-to-order workflows and customer dashboards — built for Nigerian print businesses.</p>
+        <a class="service-link" href="#contact">Get a quote →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👕</div>
+        <h3>Print-on-Demand</h3>
+        <p>Custom T-shirt printing, branded merchandise and print-on-demand fulfilment for Lagos businesses and events.</p>
+        <a class="service-link" href="#contact">Get started →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Corporate Print Suite Setup</h3>
+        <p>Full office and print suite fit-out for corporate print businesses — workflow systems, equipment layout, operator training and production management tools.</p>
+        <a class="service-link" href="#contact">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Brand Identity Design</h3>
+        <p>Logos, brand kits, stationery and visual identity systems. We help Nigerian businesses look professional and consistent.</p>
+        <a class="service-link" href="#contact">Talk to us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRINT CATEGORIES    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MACHINERY PROCUREMENT
+══════════════════════════════════════════ -->
+<section style="background:var(--ink);padding:100px 2rem;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(240,123,17,.1) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(26,158,90,.06) 0%,transparent 50%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        <span class="section-tag">Machine Procurement</span>
+        <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1rem;">Source. Install.<br><span style="color:var(--or);">Print at scale.</span></h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:1.5rem;">We source, supply and install professional print equipment for Nigerian press businesses — from offset presses to wide-format machines and finishing equipment.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:2rem;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);">
+            <span style="width:8px;height:8px;background:var(--or);border-radius:50%;flex-shrink:0;"></span>Offset printing presses (sheet-fed & web)
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);">
+            <span style="width:8px;height:8px;background:var(--or);border-radius:50%;flex-shrink:0;"></span>Digital & large format printers
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);">
+            <span style="width:8px;height:8px;background:var(--or);border-radius:50%;flex-shrink:0;"></span>Die-cutting, laminating & finishing equipment
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);">
+            <span style="width:8px;height:8px;background:var(--or);border-radius:50%;flex-shrink:0;"></span>CTP (Computer-to-Plate) systems
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);">
+            <span style="width:8px;height:8px;background:var(--or);border-radius:50%;flex-shrink:0;"></span>Installation, commissioning & operator training
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://wa.me/2349069066831?text=Hi%20Printiba%2C%20I%20need%20a%20machine%20procurement%20quote" target="_blank" class="btn-hero-or">💬 Get a procurement quote</a>
+          <a href="#contact" class="btn-hero-ghost">Learn more →</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🖨️</div>
+          <p style="font-weight:700;color:#fff;font-size:14px;margin-bottom:.3rem;">Offset Presses</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);">Heidelberg, Komori, Ryobi & more</p>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🖼️</div>
+          <p style="font-weight:700;color:#fff;font-size:14px;margin-bottom:.3rem;">Wide Format</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);">Roland, Mimaki, Epson, HP</p>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.25rem;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">✂️</div>
+          <p style="font-weight:700;color:#fff;font-size:14px;margin-bottom:.3rem;">Finishing</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);">Die-cutting, laminating, binding</p>
+        </div>
+        <div style="background:rgba(240,123,17,.1);border:1px solid rgba(240,123,17,.25);border-radius:14px;padding:1.25rem;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">📋</div>
+          <p style="font-weight:700;color:var(--or);font-size:14px;margin-bottom:.3rem;">Free Consultation</p>
+          <p style="font-size:12px;color:rgba(255,255,255,.4);">We assess your needs & budget</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PRINT CATEGORIES
+══════════════════════════════════════════ -->
+<section class="categories-section" style="padding:80px 2rem;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <span class="section-tag">Print types</span>
+      <h2 class="section-title">What can we quote for?</h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-icon">🛍️</div><h4>Paper Bags</h4><p>Retail, luxury & gift bags in any size</p></div>
+      <div class="cat-card"><div class="cat-icon">📖</div><h4>Magazines & Books</h4><p>Full imposition from A3 to A6</p></div>
+      <div class="cat-card"><div class="cat-icon">📦</div><h4>Product Boxes</h4><p>Tuck-end, crash-lock, mailer & rigid</p></div>
+      <div class="cat-card"><div class="cat-icon">📓</div><h4>Jotters & Notepads</h4><p>Saddle stitch, wire-O, perfect bound</p></div>
+      <div class="cat-card"><div class="cat-icon">📄</div><h4>Flyers & Brochures</h4><p>A4, A5, A6 — single to quad-fold</p></div>
+      <div class="cat-card"><div class="cat-icon">🖼️</div><h4>Large Format</h4><p>Flex, SAV, roll-up, canvas, mesh</p></div>
+      <div class="cat-card"><div class="cat-icon">👕</div><h4>Custom T-shirts</h4><p>Screen print, DTG & embroidery</p></div>
+      <div class="cat-card"><div class="cat-icon">🎁</div><h4>Branded Gifts</h4><p>Personalized merchandise & gifting</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════ -->
+<section id="about" style="padding:100px 2rem;background:var(--wh);">
+  <div class="about-grid">
+    <div>
+      <span class="section-tag">About Printiba</span>
+      <h2 class="section-title">Built for Nigeria's<br>print industry</h2>
+      <p style="font-size:15px;color:var(--mu);line-height:1.8;margin-bottom:1.5rem;">Founded in Lagos, Printiba was built to solve a problem every Nigerian printer knows — calculating a job cost accurately and quickly without spreadsheets, guesswork or long phone calls. We combined print industry expertise with modern technology to create Nigeria's first intelligent print production suite.</p>
+      <p style="font-size:15px;color:var(--mu);line-height:1.8;">Our mission is to empower printers, designers and businesses to quote faster, produce better and run more profitable print operations.</p>
+      <div class="about-cards">
+        <div class="about-card"><div class="ac-icon">🎯</div><h4>Our Mission</h4><p>To give every Nigerian print business the tools to quote accurately and work profitably.</p></div>
+        <div class="about-card"><div class="ac-icon">⚡</div><h4>Built Fast</h4><p>Real-time calculations. Live previews. Instant PDF quotes. No waiting, no spreadsheets.</p></div>
+        <div class="about-card"><div class="ac-icon">🇳🇬</div><h4>Nigeria First</h4><p>Built with Lagos market rates, Naira pricing, and local substrate knowledge.</p></div>
+        <div class="about-card"><div class="ac-icon">🔒</div><h4>Your Data</h4><p>All calculations run locally in your browser. Nothing is sent to any external server.</p></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-box">
+        <div class="about-nums">
+          <div><div class="about-num">6+</div><div class="about-num-lbl">Calculators</div></div>
+          <div><div class="about-num">100%</div><div class="about-num-lbl">Nigeria rates</div></div>
+          <div><div class="about-num">2023</div><div class="about-num-lbl">Founded Lagos</div></div>
+          <div><div class="about-num">⭐</div><div class="about-num-lbl">Premium tools</div></div>
+        </div>
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);">
+          <p style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:1rem;">Trademark registered — Printiba®<br>File No. NG/TM/O/2024/321307, Class 42</p>
+          <a href="Printiba_April.html" target="_blank" class="btn-hero-or" style="display:inline-flex;font-size:13px;padding:10px 20px;">Try the calculator →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PORTFOLIO
+══════════════════════════════════════════ -->
+<section class="portfolio-bg" id="portfolio" style="padding:100px 2rem;">
+  <div class="portfolio-head container">
+    <span class="section-tag">Our work</span>
+    <h2 class="section-title">Showcasing our projects</h2>
+    <p class="section-sub">A selection of web and print projects delivered for Nigerian businesses.</p>
+  </div>
+  <div class="portfolio-grid" style="margin-top:2.5rem;">
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#1a1a18,#2a1a08);">
+        <span>👗</span>
+        <span class="pcard-type">E-commerce</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Fashionista Nigeria</h3>
+        <p>Fully functional e-commerce website with modern design and seamless shopping experience. Enhanced user engagement and increased sales significantly.</p>
+        <div class="pcard-meta">
+          <span class="ptag">E-commerce</span><span class="ptag">Fashion</span><span class="ptag">May 2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#0a1a2a,#1a2a3a);">
+        <span>🏢</span>
+        <span class="pcard-type">Corporate</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Corporate Business Site</h3>
+        <p>Professionally designed corporate website showcasing services and values. Clean, authoritative and built to convert visitors into clients.</p>
+        <div class="pcard-meta">
+          <span class="ptag">Corporate</span><span class="ptag">Web Design</span><span class="ptag">July 2023</span>
+        </div>
+      </div>
+    </div>
+    <div class="pcard">
+      <div class="pcard-img" style="background:linear-gradient(135deg,#0d1a0d,#1a3a1a);">
+        <span>🖨️</span>
+        <span class="pcard-type">Print Platform</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Printiba Calculator Suite</h3>
+        <p>Nigeria's first intelligent print production calculator. Real-time quotes, live previews, premium tools and full admin dashboard.</p>
+        <div class="pcard-meta">
+          <span class="ptag">SaaS Tool</span><span class="ptag">Print Tech</span><span class="ptag">2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="testi-section" style="padding:100px 2rem;">
+  <div class="testi-head container">
+    <span class="section-tag">Testimonials</span>
+    <h2 class="section-title">What our clients say</h2>
+    <p class="section-sub" style="margin:0 auto;">Real feedback from Nigerian businesses we've worked with.</p>
+  </div>
+  <div class="testi-grid" style="margin-top:2.5rem;">
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p>Printiba transformed our online presence with a stunning website that truly reflects our brand. Their attention to detail and customer service is unmatched. Highly recommend!</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">SJ</div>
+        <div><strong>Sarah Johnson</strong><span>Marketing Director, Fashion Hub Nigeria</span></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p>The team at Printiba delivered a fantastic e-commerce solution for our business. The website is user-friendly and has significantly increased our sales. Thank you, Printiba!</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">MA</div>
+        <div><strong>Michael Adeyemi</strong><span>Business Owner, Tech Gadgets Lagos</span></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-quote">"</div>
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p>The print calculator saved me hours every week. I used to calculate manually in Excel. Now I get accurate quotes in under a minute with proper plate and paper costing.</p>
+      <div class="tcard-author">
+        <div class="tcard-avatar">AO</div>
+        <div><strong>Adebayo Okafor</strong><span>Print Manager, Lagos Press Ltd</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section class="contact-section" id="contact" style="padding:100px 2rem;">
+  <div class="contact-bg-glow"></div>
+  <div class="contact-inner">
+    <div class="contact-text">
+      <span class="section-tag">Get in touch</span>
+      <h2>Contact Printiba</h2>
+      <p>Whether you need a print quote, a new website or just want to discuss a project — we'd love to hear from you.</p>
+      <div class="contact-items">
+        <div class="citem"><div class="citem-icon">📧</div><div><strong>Email us</strong><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7aea9a1a887b7b5aea9b3aea5a6e9a4a8aa">[email&#160;protected]</a></span></div></div>
+        <div class="citem"><div class="citem-icon">📞</div><div><strong>WhatsApp & Call</strong><span>+234 906 906 6831</span></div></div>
+        <div class="citem"><div class="citem-icon">📍</div><div><strong>Find us</strong><span>Victoria Island, Lagos, Nigeria</span></div></div>
+        <div class="citem"><div class="citem-icon">🖨️</div><div><strong>Print calculator</strong><span><a href="Printiba_April.html" target="_blank" style="color:var(--or);">Open in new tab →</a></span></div></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group"><label>Full name</label><input type="text" id="cf-name" placeholder="Your name"></div>
+      <div class="form-group"><label>Email address</label><input type="email" id="cf-email" placeholder="you@email.com"></div>
+      <div class="form-group"><label>Service interested in</label>
+        <select id="cf-service" style="background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 14px;font-size:14px;font-family:'Outfit',sans-serif;color:rgba(255,255,255,.6);width:100%;outline:none;">
+          <option>Print calculator / quote</option>
+          <option>Web design</option>
+          <option>E-commerce platform</option>
+          <option>Print-on-demand</option>
+          <option>Brand identity</option>
+          <option>Other</option>
+        </select></div>
+      <div class="form-group"><label>Message</label><textarea id="cf-msg" placeholder="Tell us about your project…"></textarea></div>
+      <button class="btn-submit" onclick="submitForm()">Send message →</button>
+      <div id="form-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <span class="footer-brand">Printiba<sup style="font-size:.5em;vertical-align:super;">®</sup></span>
+        <p class="footer-desc">Nigeria's print production calculator and web design studio. Built in Lagos for Nigerian businesses.</p>
+        <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:12px;">Trademark No. NG/TM/O/2024/321307 · Class 42 · IPON Nigeria</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Print Calculator</a>
+        <a href="#services">Web Design</a>
+        <a href="#services">E-commerce</a>
+        <a href="#services">Print-on-Demand</a>
+      </div>
+      <div class="footer-col">
+        <h4>Calculator</h4>
+        <a href="Printiba_April.html" target="_blank">Free Book Quote</a>
+        <a href="Printiba_April.html" target="_blank">Free Flyer Quote</a>
+        <a href="Printiba_April.html" target="_blank">Premium Tools</a>
+        <a href="Printiba_April.html" target="_blank">Login / Register</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="Printiba.html#terms" target="_blank">Terms & Conditions</a>
+        <a href="Printiba.html#terms" target="_blank">Privacy Policy</a>
+        <a href="Printiba.html#terms" target="_blank">Refund Policy</a>
+        <a href="Printiba.html#terms" target="_blank">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Printiba®. All rights reserved. Built in Lagos, Nigeria.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="https://www.facebook.com/Printiba.ng" target="_blank" title="Facebook">f</a>
+        <a class="social-btn" href="https://www.instagram.com/ctrl_printiba/" target="_blank" title="Instagram">ig</a>
+        <a class="social-btn" href="https://wa.me/2349069066831" target="_blank" title="WhatsApp">wa</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a class="wa-float" href="https://wa.me/2349069066831" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<!-- ══════════════════════════════════════════
+     ONBOARDING MODAL
+══════════════════════════════════════════ -->
+<div class="ob-overlay" id="ob-overlay" style="display:none;">
+  <div class="ob-box">
+    <button class="ob-close" onclick="closeOb()">×</button>
+
+    <!-- Step 0: Welcome + choice -->
+    <div id="ob-s0">
+      <div class="ob-logo">Printiba<sup style="font-size:.5em;">®</sup></div>
+      <h2>Welcome to Printiba!</h2>
+      <p class="ob-sub">Nigeria's print production suite. What brings you here today? We'll show you the right path.</p>
+      <div class="ob-choices">
+        <button class="ob-choice" onclick="showObStep('quote')">
+          <span class="oc-icon">🖨️</span>
+          <strong>I need a print quote</strong>
+          <p>I want to know how much a print job will cost — bags, books, flyers, banners.</p>
+        </button>
+        <button class="ob-choice" onclick="showObStep('web')">
+          <span class="oc-icon">💻</span>
+          <strong>I need a website or design</strong>
+          <p>I'm looking for web design, e-commerce or brand identity services.</p>
+        </button>
+      </div>
+      <p class="ob-skip"><button onclick="closeOb()">Skip for now →</button></p>
+    </div>
+
+    <!-- Step 1a: Get a print quote -->
+    <div class="ob-detail" id="ob-s-quote">
+      <div class="ob-logo">Printiba<sup style="font-size:.5em;">®</sup></div>
+      <h2>Getting your print quote</h2>
+      <p class="ob-sub">Here's how to get an instant quote in under 2 minutes:</p>
+      <div class="ob-steps">
+        <div class="ob-step">
+          <div class="st-num">1</div>
+          <div><strong>Open the Print Calculator</strong><p>The calculator runs in a separate tab so you can keep this page open.</p></div>
+        </div>
+        <div class="ob-step">
+          <div class="st-num">2</div>
+          <div><strong>Pick a Quick Template or calculator</strong><p>Choose from A4 Bag, A5 Jotter, Magazine and more — all specs are pre-filled.</p></div>
+        </div>
+        <div class="ob-step">
+          <div class="st-num">3</div>
+          <div><strong>Get your full breakdown</strong><p>Plates, paper, finishing, profit and VAT — instant Naira quote ready to share.</p></div>
+        </div>
+      </div>
+      <a href="Printiba_April.html" target="_blank" class="btn-ob-or" onclick="closeOb()">🖨 Open Print Calculator →</a>
+      <button class="ob-back" onclick="showObStep(null)">← Back</button>
+    </div>
+
+    <!-- Step 1b: Web & design services -->
+    <div class="ob-detail" id="ob-s-web">
+      <div class="ob-logo">Printiba<sup style="font-size:.5em;">®</sup></div>
+      <h2>Web & Design Services</h2>
+      <p class="ob-sub">We build fast, modern websites for Nigerian businesses. Here's how to get started:</p>
+      <div class="ob-steps">
+        <div class="ob-step">
+          <div class="st-num">1</div>
+          <div><strong>Browse our services</strong><p>Web design, e-commerce, print-on-demand, brand identity — scroll down to see all.</p></div>
+        </div>
+        <div class="ob-step">
+          <div class="st-num">2</div>
+          <div><strong>Contact us</strong><p>Tell us about your project on WhatsApp or via the contact form below.</p></div>
+        </div>
+        <div class="ob-step">
+          <div class="st-num">3</div>
+          <div><strong>We build & deliver</strong><p>Fast turnaround, clean code, mobile-responsive and built for Nigerian audiences.</p></div>
+        </div>
+      </div>
+      <button class="btn-ob-outline" onclick="closeOb();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📬 Go to contact form</button>
+      <a href="https://wa.me/2349069066831?text=Hi%20Printiba%2C%20I%20need%20a%20website%20quote" target="_blank" class="btn-ob-or" onclick="closeOb()" style="display:block;text-align:center;text-decoration:none;">💬 WhatsApp us now</a>
+      <button class="ob-back" onclick="showObStep(null)">← Back</button>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── MOBILE MENU ──
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+}
+function closeMenu(){ document.getElementById('mobile-menu').classList.remove('open'); }
+
+// ── ONBOARDING ──
+const OB_KEY = 'pb_home_ob_done';
+function showObStep(step){
+  document.getElementById('ob-s0').style.display = step ? 'none' : '';
+  document.querySelectorAll('.ob-detail').forEach(d=>d.classList.remove('active'));
+  if(step) document.getElementById('ob-s-'+step)?.classList.add('active');
+}
+function closeOb(){
+  const ov=document.getElementById('ob-overlay');
+  if(ov) ov.style.display='none';
+  try{localStorage.setItem(OB_KEY,'1');}catch(e){}
+}
+// Show onboarding after 1.5s if not seen before
+window.addEventListener('DOMContentLoaded',()=>{
+  if(!localStorage.getItem(OB_KEY)){
+    setTimeout(()=>{ document.getElementById('ob-overlay').style.display='flex'; }, 1500);
+  }
+});
+
+// ── CONTACT FORM ──
+function submitForm(){
+  const name=document.getElementById('cf-name').value.trim();
+  const email=document.getElementById('cf-email').value.trim();
+  const msg=document.getElementById('cf-msg').value.trim();
+  const el=document.getElementById('form-msg');
+  if(!name||!email||!msg){ el.textContent='Please fill in all required fields.'; el.style.color='#c0392b'; return; }
+  el.textContent='✓ Message sent! We\'ll be in touch within 24 hours.';
+  el.style.color='var(--gr)';
+  ['cf-name','cf-email','cf-msg'].forEach(id=>document.getElementById(id).value='');
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.service-card,.pcard,
